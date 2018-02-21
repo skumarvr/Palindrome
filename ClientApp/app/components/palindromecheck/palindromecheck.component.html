@@ -1,0 +1,47 @@
+<h1>Palindrome Check</h1>
+
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+	<div class="form-group">
+		<label for="palinText">Enter a string to check for palindrome : </label>
+		<input type="text" class="form-control" id="palinText" required
+				[(ngModel)]="inputStr" name="palinText"
+				(change)="onTextChange()"
+				#palinText="ngModel">
+
+		<div [hidden]="palinText.valid || palinText.pristine"
+    			class="alert alert-danger">
+  			Text is required
+		</div>
+		<div [hidden]="isPalindrome"
+    			class="alert alert-danger">
+  			Text is not a Palindrome
+		</div>
+		<div [hidden]="!isInvalidRequest"
+    			class="alert alert-danger">
+  			Invalid request or an error occured at the server!!!
+		</div>
+		
+	</div>
+
+	<div class="form-group"> <!-- Submit button !-->
+		<button type="submit" class="btn btn-default">Submit</button>
+	</div>
+</form>
+
+<div class="form-group"> <!-- Submit button !-->
+	<button class="btn btn-default" (click)="getAll()">Get All</button>
+</div>
+
+<div *ngIf="showData" class="table-responsive">
+	<table class="table table-bordered table-hover table-condensed">
+		<tr>
+			<th>Id</th>
+			<th>name</th>
+		</tr>	
+		<tr *ngFor="let d of respData">
+			<td>{{ d.id }}</td>
+			<td>{{ d.text }}</td>
+		</tr>
+	</table> 
+</div>
+
